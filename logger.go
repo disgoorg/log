@@ -1,5 +1,6 @@
 package log
 
+// Logger is the logging interface you can implement/use
 type Logger interface {
 	Debug(args ...interface{})
 	Info(args ...interface{})

@@ -179,70 +179,70 @@ func (l *SimpleLogger) Panicf(format string, args ...interface{}) {
 
 // SetLevel sets the Level of the default Logger
 func SetLevel(level Level) {
-	std.SetLevel(level)
+	Default().SetLevel(level)
 }
 
 // SetFlags sets the log flags like: Ldate, Ltime, Lmicroseconds, Llongfile, Lshortfile, LUTC, Lmsgprefix,LstdFlags of the default Logger
 func SetFlags(flags int) {
-	std.SetFlags(flags)
+	Default().SetFlags(flags)
 }
 
 // Debug logs on the LevelDebug with the default SimpleLogger
 func Debug(args ...interface{}) {
-	std.Debug(args...)
+	Default().Debug(args...)
 }
 
 // Debugf logs on the LevelDebug with the default SimpleLogger
 func Debugf(format string, args ...interface{}) {
-	std.Debugf(format, args...)
+	Default().Debugf(format, args...)
 }
 
 // Info logs on the LevelInfo with the default SimpleLogger
 func Info(args ...interface{}) {
-	std.Info(args...)
+	Default().Info(args...)
 }
 
 // Infof logs on the LevelInfo with the default SimpleLogger
 func Infof(format string, args ...interface{}) {
-	std.Infof(format, args...)
+	Default().Infof(format, args...)
 }
 
 // Warn logs on the LevelWarn with the default SimpleLogger
 func Warn(args ...interface{}) {
-	std.Warn(args...)
+	Default().Warn(args...)
 }
 
 // Warnf logs on the Level with the default SimpleLogger
 func Warnf(format string, args ...interface{}) {
-	std.Warnf(format, args...)
+	Default().Warnf(format, args...)
 }
 
 // Error logs on the LevelError with the default SimpleLogger
 func Error(args ...interface{}) {
-	std.Error(args...)
+	Default().Error(args...)
 }
 
 // Errorf logs on the LevelError with the default SimpleLogger
 func Errorf(format string, args ...interface{}) {
-	std.Errorf(format, args...)
+	Default().Errorf(format, args...)
 }
 
 // Fatal logs on the LevelFatal with the default SimpleLogger
 func Fatal(args ...interface{}) {
-	std.Fatal(args...)
+	Default().Fatal(args...)
 }
 
 // Fatalf logs on the LevelFatal with the default SimpleLogger
 func Fatalf(format string, args ...interface{}) {
-	std.Fatalf(format, args...)
+	Default().Fatalf(format, args...)
 }
 
 // Panic logs on the LevelPanic with the default SimpleLogger
 func Panic(args ...interface{}) {
-	std.Panic(args...)
+	Default().Panic(args...)
 }
 
 // Panicf logs on the LevelPanic with the default SimpleLogger
 func Panicf(format string, args ...interface{}) {
-	std.Panicf(format, args...)
+	Default().Panicf(format, args...)
 }

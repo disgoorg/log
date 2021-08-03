@@ -1,6 +1,5 @@
 # log
 
-
 [![Go Reference](https://pkg.go.dev/badge/github.com/DisgoOrg/log.svg)](https://pkg.go.dev/github.com/DisgoOrg/log)
 [![Go Report](https://goreportcard.com/badge/github.com/DisgoOrg/log)](https://goreportcard.com/report/github.com/DisgoOrg/log)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/DisgoOrg/log)](https://golang.org/doc/devel/release.html)
@@ -12,10 +11,10 @@ The `Logger` interface can be used instead to give the user choice over which lo
 
 This lib ships with a default implementation of the `Logger` interface
 
-[SimpleLogger](https://github.com/DisgoOrg/log/blob/master/simple_logger.go) is a wrapped standard [Logger](https://pkg.go.dev/log) to fit the `Logger` interface
+[SimpleLogger](https://github.com/DisgoOrg/log/blob/master/simple_logger.go) is a wrapped
+standard [Logger](https://pkg.go.dev/log) to fit the `Logger` interface
 
 You can use your own implementation or a library like [logrus](https://github.com/sirupsen/logrus)
-
 
 ### Installing
 

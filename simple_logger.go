@@ -67,19 +67,25 @@ func (l Level) String() string {
 }
 
 var (
-	enableColors = true
-	prefixStyle  = ForegroundColorBrightBlack
-	levelStyle   = StyleBold
-	textStyle    = ForegroundColorWhite
+	EnableColors = true
+	PrefixStyle  = ForegroundColorBrightBlack
+	LevelStyle   = StyleBold
+	TextStyle    = ForegroundColorWhite
 )
 
-var styles = map[Level]Style{
+var Styles = map[Level]Style{
 	LevelDebug: ForegroundColorWhite,
 	LevelInfo:  ForegroundColorCyan,
 	LevelWarn:  ForegroundColorYellow,
 	LevelError: ForegroundColorBrightRed,
 	LevelFatal: ForegroundColorRed,
 	LevelPanic: ForegroundColorMagenta,
+}
+
+// SetLevelColor sets the Style of the given Level
+//goland:noinspection GoUnusedExportedFunction
+func SetLevelColor(level Level, color Style) {
+	Styles[level] = color
 }
 
 //Default returns the default SimpleLogger
@@ -125,9 +131,9 @@ func (l *SimpleLogger) Output(calldepth int, level Level, v ...interface{}) {
 		return
 	}
 
-	if l.prefix != prefixStyle {
-		l.prefix = prefixStyle
-		l.logger.SetPrefix(prefixStyle.String())
+	if l.prefix != PrefixStyle {
+		l.prefix = PrefixStyle
+		l.logger.SetPrefix(PrefixStyle.String())
 	}
 
 	v = append(v, "", StyleReset)
@@ -135,9 +141,9 @@ func (l *SimpleLogger) Output(calldepth int, level Level, v ...interface{}) {
 
 	levelStr := level.String() + " "
 	textStyleStr := ""
-	if enableColors {
-		levelStr = levelStyle.And(styles[level]).Apply(levelStr)
-		textStyleStr = textStyle.String()
+	if EnableColors {
+		levelStr = LevelStyle.And(Styles[level]).Apply(levelStr)
+		textStyleStr = TextStyle.String()
 	}
 	v[0] = levelStr
 	v[1] = textStyleStr
@@ -225,30 +231,6 @@ func SetLevel(level Level) {
 	Default().SetLevel(level)
 }
 
-// SetLevelColor sets the Style of the given Level
-//goland:noinspection GoUnusedExportedFunction
-func SetLevelColor(level Level, color Style) {
-	styles[level] = color
-}
-
-// SetLevelStyle sets the default Style of all Level(s)
-//goland:noinspection GoUnusedExportedFunction
-func SetLevelStyle(style Style) {
-	levelStyle = style
-}
-
-// EnableColors enables/disables usage of Style(s) in all Logger(s)
-//goland:noinspection GoUnusedExportedFunction
-func EnableColors(enable bool) {
-	enableColors = enable
-}
-
-// SetTextColor sets the Style which is used for text of a Output message
-//goland:noinspection GoUnusedExportedFunction
-func SetTextColor(color Style) {
-	textStyle = color
-}
-
 // SetFlags sets the Output flags like: Ldate, Ltime, Lmicroseconds, Llongfile, Lshortfile, LUTC, Lmsgprefix,LstdFlags of the default Logger
 //goland:noinspection GoUnusedExportedFunction
 func SetFlags(flags int) {
@@ -334,4 +316,3 @@ func Output(calldepth int, level Level, v ...interface{}) {
 func Outputf(calldepth int, level Level, format string, v ...interface{}) {
 	std.Outputf(calldepth+1, level, format, v...)
 }
-

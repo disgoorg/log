@@ -18,8 +18,11 @@ var std = New(log.LstdFlags)
 // The prefix is followed by a colon only when Llongfile or Lshortfile
 // is specified.
 // For example, flags Ldate | Ltime (or LstdFlags) produce,
+//
 //	2009/01/23 01:23:23 message
+//
 // while flags Ldate | Ltime | Lmicroseconds | Llongfile produce,
+//
 //	2009/01/23 01:23:23.123123 /a/b/c/d.go:23: message
 const (
 	Ldate         = 1 << iota     // the date in the local time zone: 2009/01/23
@@ -90,12 +93,12 @@ func SetLevelColor(level Level, color Style) {
 	Styles[level] = color
 }
 
-//Default returns the default SimpleLogger
+// Default returns the default SimpleLogger
 func Default() *SimpleLogger {
 	return std
 }
 
-//SetDefault sets the default SimpleLogger
+// SetDefault sets the default SimpleLogger
 func SetDefault(logger *SimpleLogger) {
 	std = logger
 }
@@ -140,23 +143,25 @@ func (l *SimpleLogger) Output(calldepth int, level Level, v ...any) {
 
 	levelStr := level.String() + " "
 	textStyleStr := ""
+	endStyleStr := ""
 	if EnableColors {
 		levelStr = LevelStyle.And(Styles[level]).Apply(levelStr)
 		textStyleStr = TextStyle.String()
+		endStyleStr = StyleReset.String()
 	}
 	v[0] = levelStr
 	v[1] = textStyleStr
 
+	s := fmt.Sprint(v...) + endStyleStr
 	switch level {
 	case LevelFatal:
-		_ = l.logger.Output(calldepth, fmt.Sprint(v...))
+		_ = l.logger.Output(calldepth, s)
 		os.Exit(1)
 	case LevelPanic:
-		s := fmt.Sprint(v...)
 		_ = l.logger.Output(calldepth, s)
 		panic(s)
 	default:
-		_ = l.logger.Output(calldepth, fmt.Sprint(v...))
+		_ = l.logger.Output(calldepth, s)
 	}
 }
 
